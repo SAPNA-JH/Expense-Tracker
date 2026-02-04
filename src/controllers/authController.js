@@ -85,6 +85,7 @@ const login = async(req, res) =>{
     // }
 
     res.status(200).json({
+        seccess:true,
         message: " register Successfully",
         token,
         users:{
@@ -97,7 +98,9 @@ const login = async(req, res) =>{
 catch (err) {
     console.log(err);
     res.status(500).json({
-        message:"server error"
+      seccess:false,
+      data:null,
+        message:err.message
     })
   }
 };

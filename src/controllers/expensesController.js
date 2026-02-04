@@ -19,12 +19,18 @@ const addExpenses = async (req, res) => {
     );
 
     res.status(200).json({
+      success:true,
+      date:result.rows[0],
       message: "Expenses Added",
-      expense: result.rows[0],
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Server Error" });
+    res.status(500).json({ 
+      success:false,
+      date:null,
+      message: errr.message, 
+
+    });
   }
 };
 
@@ -51,13 +57,16 @@ const updateExpenses = async (req, res) => {
     );
 
     res.status(200).json({
-      message: "Expense updated successfully",
-      expense: updateExpense[0],
+        success: true,
+        data: updateExpense[0],
+        message: "Expense updatef successfully",
     });
   } catch (err) {
     console.log(err.message);
     res.status(500).json({
-      message: "server Error",
+      success:false,
+      data: null,
+      message:err.message,
     });
   }
 };
@@ -80,14 +89,18 @@ const deleteExpenses = async (req, res) => {
       [expenseId, userId],
     );
     res.status(200).json({
-      message: "Expense deleted successfully",
-     expense: deleteExpense[0],
+      success: true,
+        data: deleteExpense[0],
+        message: "Expense deleted successfully",
+
 
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Server error",
+       success: false,
+      data: null,
+      message: err.message,
     });
   }
 };
